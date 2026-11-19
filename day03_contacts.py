@@ -21,7 +21,8 @@ while True:
     elif cmd == "delete":
         name = input("name: ")
         if name in contacts:
-            del contacts[name]  
+            del contacts[name]
+            print("Deleted")  
         else:
             print("Not found")              
     else:
