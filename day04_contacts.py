@@ -3,7 +3,11 @@ try:
     with open("contacts.json","r") as f:
         contacts = json.load(f)
 except FileNotFoundError:
-    contacts ={}        
+    print("no saved contacts yet. Starting a new book")
+    contacts ={}   
+except json.JSONDecodeError:
+    print("json file is corrupt.starting empty")  
+    contacts = {}       
 while True:
     cmd = input("choose add/list/quit/find/delete: ")
     if cmd == "quit":
@@ -14,8 +18,15 @@ while True:
     elif cmd == "add":
         name = input("name: ")
         phone = input("contact: ")
-        contacts[name] = phone
-        print("added contact")
+        cleaned = phone.replace(" ","").replace("+", "")
+        try:
+            int(cleaned)
+            print("added contact")
+            contacts[name] = phone
+        except ValueError:
+            print("Phone must be digits only.")    
+        
+        
 
     elif cmd == "list":
         for name in contacts:
