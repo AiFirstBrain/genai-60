@@ -12,4 +12,10 @@ def load_contacts():
     except json.JSONDecodeError:
         print("json file is corrupt.starting empty")  
         contacts = {} 
-    return contacts    
+    return contacts
+class Contact:
+    def __init__(self,name,phone):
+        self.name = name
+        self.phone = phone 
+    def display(self):
+        return f"{self.name}: {self.phone}"     

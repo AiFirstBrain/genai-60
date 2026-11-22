@@ -1,4 +1,4 @@
-from storage import load_contacts, save_contacts
+from storage import load_contacts, save_contacts, Contact
 contacts = load_contacts()      
 while True:
     cmd = input("choose add/list/quit/find/delete: ")
@@ -20,11 +20,13 @@ while True:
 
     elif cmd == "list":
         for name in contacts:
-            print(f"{name}: {contacts[name]}")  
+            c = Contact(name,contacts[name])
+            print(c.display())    
     elif cmd == "find":
         name = input("name: ")
         if name in contacts:
-            print(f"{name}: {contacts[name]}")
+            c = Contact(name,contacts[name])
+            print(c.display())
         else:
             print("Not found")
     elif cmd == "delete":
